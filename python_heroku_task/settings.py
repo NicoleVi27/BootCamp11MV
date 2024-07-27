@@ -10,11 +10,15 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
-from pathlib import Path
-from dotenv import load_dotenv
-import os 
+#ADD despliegue VERCEL
+import os
 from os import environ
+from dotenv import load_dotenv
+
+# Cargar variables de entorno desde el archivo .env
 load_dotenv()
+
+from pathlib import Path
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,7 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = environ.get('SECRET_KEY')
 #'django-insecure-tlv)36c^h%me#0j)!67193036i0(q!%)rm_9k19_&32jf9!t3b'
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -96,12 +100,12 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'postgres',
         'USER': 'postgres.bjpmcoodaqsrqbwtsebc',
-        'PASSWORD': os.environ.get('SUPABASE_PASSWORD'),
-        'HOST': os.environ.get('SUPABASE_HOST'),
-        'PORT': '5432',
+        'PASSWORD': os.getenv('SUPABASE_PASSWORD'),
+        'HOST': os.getenv('SUPABASE_HOST'),
+        'PORT': '6543',
         'OPTIONS': {
             'sslmode': 'verify-full',
-            'sslrootcert': os.path.join(BASE_DIR, 'prod-ca-2021.crt'),
+            'sslrootcert': str(BASE_DIR / 'prod-ca-2021.crt'),
         }
     }
 }
@@ -129,9 +133,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Asuncion'
 
 USE_I18N = True
 
